@@ -3,23 +3,22 @@
 
 #include QMK_KEYBOARD_H
 
-
 enum {
-    TMUX_LAYR = SAFE_RANGE,
+    KC_TMUX = SAFE_RANGE,
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case TMUX_LAYR:
-            if (record->event.pressed) {
+        case LT(3, KC_TMUX):
+            if (record->tap.count && record->event.pressed) {
                 tap_code16(LCTL(KC_B));
-            } else {
                 return false;
             }
-            return false;
+            break;
         default:
             return true;
     }
+    return true;
 }
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -31,7 +30,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //|----------------+----------------+----------------+----------------+----------------+----------------|                    |----------------+----------------+----------------+----------------+----------------+----------------|
        XXXXXXX,         KC_Z,            KC_X,            KC_C,            KC_V,            KC_B,                                 KC_N,            KC_M,            KC_COMMA,        KC_DOT,          KC_SLASH,        XXXXXXX,
     //|----------------+----------------+----------------+----------------+----------------+----------------|                    |----------------+----------------+----------------+----------------+----------------+----------------|
-                                                                LT(3, KC_DEL),   LT(1, KC_BSPC),  LT(2, KC_TAB),           LT(2, KC_ENTER), LT(1, KC_SPACE), TMUX_LAYR
+                                                                LT(3, KC_DEL),   LT(1, KC_BSPC),  LT(2, KC_TAB),           LT(2, KC_ENTER), LT(1, KC_SPACE), LT(3, KC_TMUX)
                                                              //`----------------+----------------+----------------'       `----------------+----------------+----------------'
     ),
 
