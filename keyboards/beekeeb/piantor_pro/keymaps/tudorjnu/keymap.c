@@ -4,6 +4,24 @@
 #include QMK_KEYBOARD_H
 
 
+enum {
+    TMUX_LAYR = SAFE_RANGE,
+};
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case TMUX_LAYR:
+      if (record->event.pressed) {
+        tap_code16(LCTL(KC_B));
+      } else {
+        return false;
+      }
+      return false; // Skip all further processing of this key
+    default:
+      return true; // Process all other keycodes normally
+  }
+}
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT_split_3x6_3(
     //,----------------+----------------+----------------+----------------+----------------+----------------|                    |----------------+----------------+----------------+----------------+----------------+----------------|
@@ -13,7 +31,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //|----------------+----------------+----------------+----------------+----------------+----------------|                    |----------------+----------------+----------------+----------------+----------------+----------------|
        XXXXXXX,         KC_Z,            KC_X,            KC_C,            KC_V,            KC_B,                                 KC_N,            KC_M,            KC_COMMA,        KC_DOT,          KC_SLASH,        XXXXXXX,
     //|----------------+----------------+----------------+----------------+----------------+----------------|                    |----------------+----------------+----------------+----------------+----------------+----------------|
-                                                                LT(3, KC_DEL),   LT(1, KC_BSPC),  LT(2, KC_TAB),           LT(2, KC_ENTER), LT(1, KC_SPACE), LCTL(KC_B)
+                                                                LT(3, KC_DEL),   LT(1, KC_BSPC),  LT(2, KC_TAB),           LT(2, KC_ENTER), LT(1, KC_SPACE), TMUX_LAYR
                                                              //`----------------+----------------+----------------'       `----------------+----------------+----------------'
     ),
 
