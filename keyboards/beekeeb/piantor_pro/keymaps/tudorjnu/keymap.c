@@ -9,17 +9,17 @@ enum {
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-    case TMUX_LAYR:
-      if (record->event.pressed) {
-        tap_code16(LCTL(KC_B));
-      } else {
-        return false;
-      }
-      return false; // Skip all further processing of this key
-    default:
-      return true; // Process all other keycodes normally
-  }
+    switch (keycode) {
+        case TMUX_LAYR:
+            if (record->event.pressed) {
+                tap_code16(LCTL(KC_B));
+            } else {
+                return false;
+            }
+            return false;
+        default:
+            return true;
+    }
 }
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
