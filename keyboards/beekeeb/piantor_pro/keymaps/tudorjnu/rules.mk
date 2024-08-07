@@ -7,3 +7,5 @@ DYNAMIC_TAPPING_TERM_ENABLE = yes
 # tap dance
 # TAP_DANCE_ENABLE = yes
 SRC += features/layer_lock.c
+
+COMBO_ENABLE = yes

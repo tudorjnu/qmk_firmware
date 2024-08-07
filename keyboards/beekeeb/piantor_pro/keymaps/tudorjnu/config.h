@@ -3,6 +3,3 @@
 
 // mod-tap configuration
 #define TAPPING_TERM 180
-
-// Allows for compiling keycode
-#define ENABLE_COMPILE_KEYCODE
