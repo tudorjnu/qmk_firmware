@@ -3,3 +3,4 @@
 
 // mod-tap configuration
 #define TAPPING_TERM 180
+#define QUICK_TAP_TERM 0
