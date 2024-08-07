@@ -9,3 +9,4 @@ DYNAMIC_TAPPING_TERM_ENABLE = yes
 SRC += features/layer_lock.c
 
 COMBO_ENABLE = yes
+KEY_OVERRIDE_ENABLE = yes
