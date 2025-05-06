@@ -6,4 +6,4 @@
 // #define QUICK_TAP_TERM 100
 
 #define PERMISSIVE_HOLD
-#define DEBOUNCE 5
+#define DEBOUNCE 10

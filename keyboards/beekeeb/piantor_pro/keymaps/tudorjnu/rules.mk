@@ -10,3 +10,6 @@ SRC += features/layer_lock.c
 
 COMBO_ENABLE = yes
 KEY_OVERRIDE_ENABLE = yes
+
+# FIX CHATTER
+DEBOUNCE_TYPE = sym_defer_pk
