@@ -1,9 +1,4 @@
-#include "features/layer_lock.h"
 #include QMK_KEYBOARD_H
-
-enum custom_keycodes {
-    LLOCK = SAFE_RANGE,
-};
 
 enum layer_names {
     _BASE,
@@ -36,7 +31,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //|----------------+----------------+----------------+----------------+----------------+----------------|                    |----------------+----------------+----------------+----------------+----------------+----------------|
        KC_ESCAPE,       LALT_T(KC_A),    LGUI_T(KC_S),    LSFT_T(KC_D),    LCTL_T(KC_F),    KC_G,                                 KC_H,            RCTL_T(KC_J),    RSFT_T(KC_K),    RGUI_T(KC_L),    RALT_T(KC_SCLN), XXXXXXX,
     //|----------------+----------------+----------------+----------------+----------------+----------------|                    |----------------+----------------+----------------+----------------+----------------+----------------|
-       LLOCK,           KC_Z,            KC_X,            KC_C,            KC_V,            KC_B,                                 KC_N,            KC_M,            KC_COMMA,        KC_DOT,          KC_SLASH,        LLOCK,
+       KC_RALT,         KC_Z,            KC_X,            KC_C,            KC_V,            KC_B,                                 KC_N,            KC_M,            KC_COMMA,        KC_DOT,          KC_SLASH,        QK_LAYER_LOCK,
     //|----------------+----------------+----------------+----------------+----------------+----------------|                    |----------------+----------------+----------------+----------------+----------------+----------------|
                                                      LT(_FN, KC_DEL),   LT(_SYM, KC_BSPC),  LT(_NAV_NUMS, KC_TAB),           LT(_NAV_NUMS, KC_ENTER), LT(_SYM, KC_SPACE), LT(_FN, KC_NO)
                                                              //`----------------+----------------+----------------'       `----------------+----------------+----------------'
@@ -58,7 +53,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //,----------------+----------------+----------------+----------------+----------------+----------------|                    |----------------+----------------+----------------+----------------+----------------+----------------|
        XXXXXXX,         KC_9,            KC_8,            KC_7,            KC_6,            KC_5,                                 KC_HOME,         KC_PGDN,         KC_PGUP,         KC_END,          XXXXXXX,         XXXXXXX,
     //|----------------+----------------+----------------+----------------+----------------+----------------|                    |----------------+----------------+----------------+----------------+----------------+----------------|
-       XXXXXXX,         LALT_T(KC_4),    LGUI_T(KC_3),    LSFT_T(KC_2),    LCTL_T(KC_1),    KC_0,                                 KC_LEFT,         RCTL_T(KC_DOWN), RSFT_T(KC_UP),   RGUI_T(KC_RIGHT), RALT(XXXXXXX),  XXXXXXX,
+       XXXXXXX,         LALT_T(KC_4),    LGUI_T(KC_3),    LSFT_T(KC_2),    LCTL_T(KC_1),    KC_0,                                 KC_LEFT,         RCTL_T(KC_DOWN), RSFT_T(KC_UP),   RGUI_T(KC_RIGHT), KC_RALT,  XXXXXXX,
     //|----------------+----------------+----------------+----------------+----------------+----------------|                    |----------------+----------------+----------------+----------------+----------------+----------------|
        _______,         KC_UNDO,         KC_CUT,          KC_COPY,         KC_PASTE,         XXXXXXX,                              LALT(KC_LEFT),   RCTL(KC_PGDN),   RCTL(KC_PGUP),   LALT(KC_RIGHT),  XXXXXXX,         _______,
     //|----------------+----------------+----------------+----------------+----------------+----------------|                    |----------------+----------------+----------------+----------------+----------------+----------------|
@@ -93,11 +88,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // clang-format on
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (!process_layer_lock(keycode, record, LLOCK)) {
-        return false;
-    }
     switch (keycode) {
-        case LT(3, KC_NO):
+        case LT(_FN, KC_NO):
             if (record->tap.count && record->event.pressed) {
                 tap_code16(LCTL(KC_B));
                 return false;
